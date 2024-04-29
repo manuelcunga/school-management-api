@@ -34,7 +34,7 @@ func (router *RouterImpl) Router() *echo.Echo {
 // @Tags Home
 // @Accept  json
 // @Produce  json
-// @Success 200 {string} string	"Hello, Angola!"
+// @Success 200 {string} string	"School manegment version 1.0"
 // @Router / [get]
 
 func (router *RouterImpl) home() echo.HandlerFunc {

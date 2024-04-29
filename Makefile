@@ -10,7 +10,7 @@ DATABSE_DSN       ?= ${DATABASE_USERNAME}:${DATABASE_PASSWORD}@${DATABASE_HOST}:
 
 .PHONY: swagger
 swagger:
-	@swag init -g util/swagger.go -o api
+	@swag init -g utils/swagger.go -o api
 
 ## build: Build app binary
 .PHONY: build
