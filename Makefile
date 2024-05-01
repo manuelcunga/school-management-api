@@ -16,7 +16,9 @@ docs:
 ## build: Build app binary
 .PHONY: build
 build:
-	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o bin/app main.go
+	$(GOFLAGS) $(GO_BUILD) -a -v -ldflags="-w -s" -o bin/app main.go
+
+
 
 start: 
 		go run main.go

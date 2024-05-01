@@ -1,0 +1,7 @@
+.github
+docs
+tmp
+.gitignore
+*.out
+*.md
+Dockerfile.dev
