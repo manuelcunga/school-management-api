@@ -1,6 +1,6 @@
 # school-management-api
 
- - [x] - COnfiguaar docker Hub e postar as imagens 
+
  - [x] - Criar escola
  - [x] - Pegar escola pelo ID
  - [x] - Atualizar escola
