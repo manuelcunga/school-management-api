@@ -17,7 +17,6 @@ func NewDeleteSchoolUsecase(schoolRepo repository.ISchoolRepository) *DeleteScho
 
 func (s DeleteSchoolUsecase) Delete(schoolID string) error {
 	school, err := s.ISchoolRepository.FindByID(schoolID)
-	fmt.Println(school)
 
 	if err != nil {
 		return fmt.Errorf(string(util.NotFoundSchool))

@@ -1,18 +1,209 @@
 basePath: /
-host: localhost:8000
+definitions:
+  dtos.CreateSchoolInput:
+    properties:
+      email:
+        type: string
+      name:
+        type: string
+      province:
+        type: string
+      room_number:
+        type: string
+    type: object
+  dtos.SchoolOutput:
+    properties:
+      Room_number:
+        type: string
+      created_at:
+        type: string
+      email:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+      province:
+        type: string
+      updated_at:
+        type: string
+    type: object
+  dtos.UpdateSchoolInput:
+    properties:
+      Room_number:
+        type: string
+      email:
+        type: string
+      name:
+        type: string
+      province:
+        type: string
+    type: object
+  messageserrors.MessageResponse:
+    properties:
+      message:
+        type: string
+    type: object
+host: petstore.swagger.io
 info:
   contact:
     email: support@swagger.io
     name: API Support
     url: http://www.swagger.io/support
-  description: This is a sample server server.
+  description: This is a sample server sSchool Management API.
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: http://swagger.io/terms/
-  title: School Management Api
+  title: School Management API
   version: "1.0"
-paths: {}
-schemes:
-- http
+paths:
+  /api/v1/schools:
+    get:
+      consumes:
+      - application/json
+      description: Find All School
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dtos.SchoolOutput'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/messageserrors.MessageResponse'
+      summary: Find All School
+      tags:
+      - School
+    post:
+      consumes:
+      - application/json
+      description: Create school
+      parameters:
+      - description: School
+        in: body
+        name: school
+        required: true
+        schema:
+          $ref: '#/definitions/dtos.CreateSchoolInput'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/dtos.SchoolOutput'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/messageserrors.MessageResponse'
+      summary: Create School
+      tags:
+      - School
+  /api/v1/schools/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete School
+      parameters:
+      - description: School ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dtos.SchoolOutput'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/messageserrors.MessageResponse'
+      summary: Delete School
+      tags:
+      - School
+    get:
+      consumes:
+      - application/json
+      description: Find One School
+      parameters:
+      - description: School ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dtos.SchoolOutput'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/messageserrors.MessageResponse'
+      summary: Find One  School
+      tags:
+      - School
+    put:
+      consumes:
+      - application/json
+      description: Update School
+      parameters:
+      - description: School ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: School
+        in: body
+        name: School
+        required: true
+        schema:
+          $ref: '#/definitions/dtos.UpdateSchoolInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dtos.SchoolOutput'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/messageserrors.MessageResponse'
+      summary: Update School
+      tags:
+      - School
+  /api/v1/schools/upload:
+    post:
+      consumes:
+      - multipart/form-data
+      description: Register School from Import excel file
+      parameters:
+      - description: Excel file to upload (.xlsx)
+        in: formData
+        name: file
+        required: true
+        type: file
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dtos.SchoolOutput'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/messageserrors.MessageResponse'
+      summary: Upload Excel file School
+      tags:
+      - School
 swagger: "2.0"

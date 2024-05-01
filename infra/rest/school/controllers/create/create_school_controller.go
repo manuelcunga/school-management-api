@@ -17,6 +17,15 @@ func NewCreateSchoolController(schoolUsecase usecases.CreateSchoolUsecases) *Cre
 	return &CreateSchoolController{createSchoolUsecae: schoolUsecase}
 }
 
+// @Summary Create School
+// @Description Create school
+// @Tags School
+// @Accept  json
+// @Produce  json
+// @Param school body dtos.CreateSchoolInput true "School"
+// @Success 201 {object} dtos.SchoolOutput
+// @Failure 500 {object} messageserrors.MessageResponse
+// @Router /api/v1/schools [post]
 func (ctrl *CreateSchoolController) Handler(ctx echo.Context) error {
 	var schoolDTO dtos.CreateSchoolInput
 

@@ -20,6 +20,15 @@ func NewUploadController(uploadUseCase usecases.UploadUseCase) *UploadController
 	}
 }
 
+// @Summary Upload Excel file School
+// @Description Register School from Import excel file
+// @Tags School
+// @Accept multipart/form-data
+// @Produce json
+// @Param file formData file true "Excel file to upload (.xlsx)"
+// @Success 200 {object} dtos.SchoolOutput
+// @Failure 400 {object} messageserrors.MessageResponse
+// @Router /api/v1/schools/upload [post]
 func (ctrl *UploadController) Handler(ctx echo.Context) error {
 	file, err := ctx.FormFile("file")
 	if err != nil {
@@ -42,6 +51,11 @@ func (ctrl *UploadController) Handler(ctx echo.Context) error {
 		if err != nil {
 			fmt.Println("Failed to upload file:", err)
 		}
+
+		if err != nil {
+			ctx.JSON(http.StatusInternalServerError, messageserrors.MessageResponse{Message: err.Error()})
+		}
+
 	}()
 
 	<-done

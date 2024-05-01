@@ -10,7 +10,6 @@ import (
 	"github.com/manuelcunga/school-management-api/domain/entities"
 	"github.com/manuelcunga/school-management-api/domain/repository"
 	"github.com/manuelcunga/school-management-api/usecases/school/dtos"
-	util "github.com/manuelcunga/school-management-api/utils"
 	"github.com/manuelcunga/school-management-api/utils/firebase"
 	"github.com/tealeg/xlsx"
 )
@@ -26,7 +25,6 @@ func NewUploadUseCase(schoolRepo repository.ISchoolRepository) *UploadUseCase {
 }
 
 func (uc *UploadUseCase) Execute(file *multipart.FileHeader) error {
-	// Abrir o arquivo enviado pelo cliente
 	fileReader, err := file.Open()
 	if err != nil {
 		return fmt.Errorf("failed to open file: %v", err)
@@ -49,12 +47,10 @@ func (uc *UploadUseCase) Execute(file *multipart.FileHeader) error {
 		return fmt.Errorf("failed to open Excel file: %w", err)
 	}
 
-	// Ignorar a primeira linha (cabeçalho)
 	firstRowSkipped := false
 
 	for _, sheet := range xlFile.Sheets {
 		for _, row := range sheet.Rows {
-			// Ignorar a primeira linha
 			if !firstRowSkipped {
 				firstRowSkipped = true
 				continue
@@ -81,9 +77,9 @@ func (uc *UploadUseCase) Execute(file *multipart.FileHeader) error {
 			if err != nil {
 				return fmt.Errorf("failed to check school existence: %v", err)
 			}
-			if exists {
-				return fmt.Errorf(string(util.SchoolAlredayExists))
 
+			if exists {
+				continue
 			}
 
 			if err := uc.schoolRepo.Create(newSchool); err != nil {

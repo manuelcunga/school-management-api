@@ -20,7 +20,7 @@ var (
 
 func InitFirebase() error {
 
-	opt := option.WithCredentialsFile("./school-management-b6bd7-firebase-adminsdk-v1z7j-d7301ecd03.json")
+	opt := option.WithCredentialsFile("config/firebase/Credentials/school-management-b6bd7-firebase-adminsdk-v1z7j-d7301ecd03.json")
 	app, err := firebase.NewApp(context.Background(), nil, opt)
 
 	if err != nil {

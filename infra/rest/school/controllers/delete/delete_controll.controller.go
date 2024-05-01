@@ -16,6 +16,15 @@ func NewUpdateSchoolController(SchoolUsecase usecases.DeleteSchoolUsecase) *Dele
 	return &DeleteSchoolController{deleteSchoolController: SchoolUsecase}
 }
 
+// @Summary Delete School
+// @Description Delete School
+// @Tags School
+// @Accept  json
+// @Produce  json
+// @Param id path string true "School ID"
+// @Success 200 {object}  dtos.SchoolOutput
+// @Failure 500 {object}  messageserrors.MessageResponse
+// @Router /api/v1/schools/{id} [delete]
 func (s DeleteSchoolController) Handler(ctx echo.Context) error {
 	schoolID := ctx.Param("id")
 

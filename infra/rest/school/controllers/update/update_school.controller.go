@@ -17,6 +17,16 @@ func NewUpdateSchoolController(ScholUsecase usecases.UpdateSchoolUsecase) *Updat
 	return &UpdateSchoolController{uodateSchoolUsecase: ScholUsecase}
 }
 
+// @Summary Update School
+// @Description Update School
+// @Tags School
+// @Accept  json
+// @Produce  json
+// @Param id path string true "School ID"
+// @Param School body dtos.UpdateSchoolInput true "School"
+// @Success 200 {object} dtos.SchoolOutput
+// @Failure 500 {object} messageserrors.MessageResponse
+// @Router /api/v1/schools/{id} [put]
 func (s UpdateSchoolController) Handler(ctx echo.Context) error {
 	id := ctx.Param("id")
 
